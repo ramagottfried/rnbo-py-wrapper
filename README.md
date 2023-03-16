@@ -12,4 +12,4 @@ cmake ../rnbo-py-wrapper -D RNBO_EXPORT_FOLDER='/path/to/RNBO/export/folder'
 ```
 4. then run `make` to build the `libRNBOExportLib.dylib`(on Mac, .dll on Windows)
 5. the script will copy the `rnbo.py` and `import-test.py` files to the build folder.
-6. see the `import-test.py`
+6. see the `import-test.py` file for example of usage.
