@@ -1,4 +1,7 @@
-# https://nesi.github.io/perf-training/python-scatter/ctypes
+"""
+python wrapper for Max RNBO exported C++
+rama gottfried, icst zhdk 2023
+"""
 
 import ctypes
 import sys

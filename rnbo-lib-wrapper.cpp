@@ -1,3 +1,8 @@
+/*
+    python wrapper for Max RNBO exported C++
+    rama gottfried, icst zhdk 2023
+*/
+
 #include <iostream>
 #include <memory>
 #include "RNBO.h"
