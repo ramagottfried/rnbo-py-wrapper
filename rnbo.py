@@ -1,8 +1,13 @@
 # https://nesi.github.io/perf-training/python-scatter/ctypes
 
 import ctypes
+import sys
 
-rnbo = ctypes.CDLL("libRNBOExportLib")
+if sys.platform == "darwin":
+    rnbo = ctypes.CDLL("libRNBOExportLib.dylib")
+elif sys.platform.startswith('win'):
+    rnbo = ctypes.CDLL("libRNBOExportLib.dll")
+# else for linux check later
 
 def init(sampleRate, vectorSize):
 
