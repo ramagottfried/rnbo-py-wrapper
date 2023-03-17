@@ -9,7 +9,7 @@ import sys
 if sys.platform == "darwin":
     rnbo = ctypes.CDLL("libRNBOExportLib.dylib")
 elif sys.platform.startswith('win'):
-    rnbo = ctypes.CDLL("libRNBOExportLib.dll")
+    rnbo = ctypes.CDLL(os.path.abspath("RNBOExportLib.dll"))
 # else for linux check later
 
 def init(sampleRate, vectorSize):
