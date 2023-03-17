@@ -8,7 +8,7 @@
 #include "RNBO.h"
 
 #define WIN_DECLSPEC
-#ifdef(WIN32)
+#ifdef WIN32
 #define WIN_DECLSPEC __declspec(dllexport)
 #endif
 
