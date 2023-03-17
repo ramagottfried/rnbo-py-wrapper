@@ -42,6 +42,9 @@ def init(sampleRate, vectorSize):
     rnbo.rnbo_process_vec.restype = ctypes.POINTER(ctypes.c_double * vectorSize)
 
 
+def clearState():
+    rnbo.clearState()
+
 def printInfo():
     rnbo.printInfo()
 
