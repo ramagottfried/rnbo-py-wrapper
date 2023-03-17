@@ -4,7 +4,7 @@ rama gottfried, icst zhdk 2023
 """
 
 import ctypes
-import sys
+import sys, os
 
 if sys.platform == "darwin":
     rnbo = ctypes.CDLL("libRNBOExportLib.dylib")
