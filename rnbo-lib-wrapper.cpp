@@ -7,6 +7,11 @@
 #include <memory>
 #include "RNBO.h"
 
+#define WIN_DECLSPEC
+#ifdef(WIN32)
+#define WIN_DECLSPEC __declspec(dllexport)
+#endif
+
 /** globals **/
 int sampleRate = 48000;
 int vectorSize = 64;
@@ -16,7 +21,7 @@ std::vector<RNBO::SampleValue> retVec; // state holder for return vector to pyth
 
 extern "C" {
 
-void init(int sr, int vs)
+WIN_DECLSPEC void init(int sr, int vs)
 {
     rnboObject = std::make_unique<RNBO::CoreObject>();
 
@@ -27,7 +32,7 @@ void init(int sr, int vs)
     rnboObject->prepareToProcess(sr, vs);
 }
 
-bool validObject()
+WIN_DECLSPEC bool validObject()
 {
     if(!rnboObject.get()){
         std::cout << "error: RNBO object must be initialized before use -- to initialize call: init(samplerate, vectorsize)";
@@ -39,7 +44,7 @@ bool validObject()
 
 // https://rnbo.cycling74.com/learn/getting-and-setting-parameters-cpp
 
-void printInfo()
+WIN_DECLSPEC void printInfo()
 {
     if( !validObject() ) return;
 
@@ -61,14 +66,14 @@ void printInfo()
 }
 
 
-void clearState() {
+WIN_DECLSPEC void clearState() {
     if( !validObject() ) return;
 
     rnboObject->prepareToProcess(sampleRate, vectorSize);
 }
 
 
-RNBO::SampleValue* rnbo_process_vec()
+WIN_DECLSPEC RNBO::SampleValue* rnbo_process_vec()
 {
     if( !validObject() ) return nullptr;
 
@@ -81,7 +86,7 @@ RNBO::SampleValue* rnbo_process_vec()
 }
 
 // set-get by Id
-void setParamValueById(const char* id, double val) 
+WIN_DECLSPEC void setParamValueById(const char* id, double val) 
 {    
     if( !validObject() ) return;
 
@@ -89,7 +94,7 @@ void setParamValueById(const char* id, double val)
     rnboObject->setParameterValue(parameterIndex, val);
 }
 
-double getParamValueById(const char* id) 
+WIN_DECLSPEC double getParamValueById(const char* id) 
 {    
     if( !validObject() ) return 0;
 
@@ -97,7 +102,7 @@ double getParamValueById(const char* id)
     return rnboObject->getParameterValue(parameterIndex);
 }
 
-void setNormParamValueById(const char* id, double val) 
+WIN_DECLSPEC void setNormParamValueById(const char* id, double val) 
 {    
     if( !validObject() ) return;
 
@@ -105,7 +110,7 @@ void setNormParamValueById(const char* id, double val)
     rnboObject->setParameterValueNormalized(parameterIndex, val);
 }
 
-double convertFromNormParamValueById(const char* id, double val) 
+WIN_DECLSPEC double convertFromNormParamValueById(const char* id, double val) 
 {    
     if( !validObject() ) return 0;
 
@@ -115,28 +120,28 @@ double convertFromNormParamValueById(const char* id, double val)
 
 // set-get by Idx
 
-void setParamValueByIdx(int idx, double val) 
+WIN_DECLSPEC void setParamValueByIdx(int idx, double val) 
 {
     if( !validObject() ) return;
 
     rnboObject->setParameterValue(idx, val);
 }
 
-double getParamValueByIdx(int idx) 
+WIN_DECLSPEC double getParamValueByIdx(int idx) 
 {    
     if( !validObject() ) return 0;
 
     return rnboObject->getParameterValue(idx);
 }
 
-void setNormParamValueByIdx(int idx, double val) 
+WIN_DECLSPEC void setNormParamValueByIdx(int idx, double val) 
 {    
     if( !validObject() ) return;
 
     rnboObject->setParameterValueNormalized(idx, val);
 }
 
-double convertFromNormParamValueByIdx(int idx, double val) 
+WIN_DECLSPEC double convertFromNormParamValueByIdx(int idx, double val) 
 {    
     if( !validObject() ) return 0;
 
@@ -148,7 +153,7 @@ double convertFromNormParamValueByIdx(int idx, double val)
 
 // https://rnbo.cycling74.com/learn/sending-and-receiving-midi-cpp
 
-void midiEvent(int midiNote, int midiVelocity) 
+WIN_DECLSPEC void midiEvent(int midiNote, int midiVelocity) 
 {
     if( !validObject() ) return;
 
