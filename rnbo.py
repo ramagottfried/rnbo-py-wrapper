@@ -4,7 +4,7 @@ rama gottfried, icst zhdk 2023
 """
 
 import ctypes
-import sys, os
+import sys, os, numpy
 
 if sys.platform == "darwin":
     rnbo = ctypes.CDLL("libRNBOExportLib.dylib")
@@ -76,4 +76,4 @@ def convertFromNormParamValueByIdx(idx):
     return rnbo.convertFromNormParamValueByIdx(idx)
 
 def process(): #just output for now
-    return rnbo.rnbo_process_vec().contents
+    return numpy.array( rnbo.rnbo_process_vec().contents )
